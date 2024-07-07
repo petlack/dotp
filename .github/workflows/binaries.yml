@@ -1,0 +1,57 @@
+name: Compile Binaries
+on:
+  push:
+    tags:
+      - "v*.*.*"
+jobs:
+  compile:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            goos: linux
+            goarch: amd64
+            asset_name: dotp-linux-amd64
+          - os: ubuntu-latest
+            goos: linux
+            goarch: arm64
+            asset_name: dotp-linux-arm64
+          - os: ubuntu-latest
+            goos: linux
+            goarch: arm
+            asset_name: dotp-linux-arm32
+          - os: ubuntu-latest
+            goos: linux
+            goarch: 386
+            asset_name: dotp-linux-i386
+          - os: ubuntu-latest
+            goos: js
+            goarch: wasm
+            asset_name: dotp-wasm
+          - os: macos-latest
+            goos: darwin
+            goarch: amd64
+            asset_name: dotp-macos-amd64
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+      - name: Build
+        run: |
+          CGO_ENABLED=0 GOOS=${{ matrix.goos }} GOARCH=${{ matrix.goarch }} go build -a -ldflags="-s -w" -installsuffix cgo -o build/dotp .
+      - name: Test
+        run: go test -v ./...
+        if: matrix.goos == 'linux' && matrix.goarch == 'amd64'
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: build/dotp
+          asset_name: ${{ matrix.asset_name }}
+          tag: ${{ github.ref }}
+          overwrite: true
+permissions:
+  contents: write

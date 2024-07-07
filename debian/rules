@@ -1,0 +1,12 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@
+
+override_dh_auto_build:
+	CGO_ENABLED=0 GOOS=linux go build -a -ldflags="-s -w" -installsuffix cgo -o build/dotp .
+
+override_dh_auto_install:
+	dh_auto_install
+	mkdir -p debian/dotp/usr/bin
+	cp -a build/dotp debian/dotp/usr/bin/dotp
