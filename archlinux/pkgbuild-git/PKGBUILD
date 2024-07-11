@@ -1,14 +1,15 @@
-pkgname=dotp
+# Maintainer: Peter Laca <peter@laca.me>
+pkgname=dotp-git
 pkgrel=1
 pkgver=0.0.0.20240711.01
 pkgdesc="Command-line tool for managing Time-based One-Time Passwords (TOTPs)"
 arch=('i686' 'x86_64')
-url="https://github.com/petlack/$pkgname"
+url="https://github.com/petlack/dotp"
 license=('GPL-3.0-or-later')
 depends=()
 makedepends=('git' 'go')
-provides=("$pkgname")
-conflicts=("$pkgname")
+provides=("dotp")
+conflicts=("dotp")
 source=("dotp::git+https://github.com/petlack/dotp")
 sha256sums=("SKIP")
 
@@ -25,11 +26,11 @@ build() {
 		go build -a \
 		-ldflags="-s -w" \
 		-installsuffix cgo \
-		-o build/$pkgname \
+		-o build/dotp \
 		.
 }
 
 package() {
 	cd "${srcdir}/dotp" || exit
-	install -Dm755 build/$pkgname "$pkgdir/usr/bin/$pkgname"
+	install -Dm755 build/dotp "$pkgdir/usr/bin/dotp"
 }

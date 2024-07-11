@@ -65,7 +65,7 @@ These options describe the source of the secret and can be one of
 ### Archlinux
 #### Install from AUR
 ```bash
-yay -S dotp
+yay -S dotp-git
 ```
 
 #### Build package from source
