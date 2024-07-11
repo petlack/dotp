@@ -91,8 +91,8 @@ package-arch: package-clean tarball
 
 # Clean package build artifacts
 package-clean:
-    rm -rf archlinux/pkgbuild-*/{src,pkg,{{ BIN_NAME }}}
-    rm -rf archlinux/pkgbuild-*/*.zst
+    rm -rf archlinux/pkgbuild-{src,git}/{src,pkg,{{ BIN_NAME }}}
+    rm -rf archlinux/pkgbuild-{src,git}/*.tar.{zst,gz}
 
 # Bump the version, create a git tag and release branch
 release-src:
@@ -109,14 +109,19 @@ release-src:
     echo $new_version > {{ VERSION_FILE }}; \
     git add {{ VERSION_FILE }} && git commit -m "chore: bump $version -> $new_version"; \
 
-# Bump the version in the Arch package
-release-arch:
+# Bump the version in the Arch *-src package
+release-arch-src:
     sed -i "s/^pkgver=.*$/pkgver=$(cat {{ VERSION_FILE }})/" archlinux/pkgbuild-src/PKGBUILD
-    sed -i "s/^pkgver=.*$/pkgver=$(cat {{ VERSION_FILE }})/" archlinux/pkgbuild-git/PKGBUILD
-    git add archlinux && git commit -m "chore(arch): bump version to $(cat {{ VERSION_FILE }})"
+    git add archlinux/pkgbuild-src && git commit -m "chore(arch-src): bump version to $(cat {{ VERSION_FILE }})"
+
+# Bump the version in the Arch *-git package
+release-arch-git:
+    makepkg --dir archlinux/pkgbuild-git --noconfirm
+    makepkg --dir archlinux/pkgbuild-git --printsrcinfo > archlinux/pkgbuild-git/.SRCINFO
+    git add archlinux/pkgbuild-git && git commit -m "chore(arch-git): bump version to $(cat {{ VERSION_FILE }})"
 
 # Bump the version, create a git tag and release branch
-release: release-src release-arch
+release: release-src release-arch-src
     just git-tag; \
     just git-release-branch; \
     version=$(cat {{ VERSION_FILE }}); \

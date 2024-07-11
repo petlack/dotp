@@ -1,6 +1,7 @@
 [![Build Arch Linux Package](https://github.com/petlack/dotp/actions/workflows/arch.yml/badge.svg)](https://github.com/petlack/dotp/actions/workflows/arch.yml)
 [![Build Debian Package](https://github.com/petlack/dotp/actions/workflows/debian.yml/badge.svg)](https://github.com/petlack/dotp/actions/workflows/debian.yml)
-[![Build & Release Go Binaries](https://github.com/petlack/dotp/actions/workflows/release.yml/badge.svg)](https://github.com/petlack/dotp/actions/workflows/release.yml)
+[![Compile Binaries](https://github.com/petlack/dotp/actions/workflows/compile.yml/badge.svg)](https://github.com/petlack/dotp/actions/workflows/compile.yml)
+[![Tests](https://github.com/petlack/dotp/actions/workflows/tests.yml/badge.svg)](https://github.com/petlack/dotp/actions/workflows/tests.yml)
 
 # dotp
 
@@ -18,7 +19,7 @@
   - [Archlinux](#archlinux)
     - [Install from AUR](#install-from-aur)
     - [Build package from source](#build-package-from-source)
-    - [Install from release Archlinux package](#install-from-release-archlinux-package)
+    - [Install from release](#install-from-release)
   - [Ubuntu/Debian](#ubuntudebian)
   - [Other](#other)
     - [Build from source](#build-from-source)
@@ -78,7 +79,7 @@ just package-arch
 sudo pacman -U ./archlinux/pkgbuild-src/dotp-0.0.1.20240711.01-1-x86_64.pkg.tar.zst
 ```
 
-#### Install from release Archlinux package
+#### Install from release
 Head to the [Releases](https://github.com/petlack/dotp/releases) section and download the latest Archlinux package.
 ```bash
 wget https://github.com/petlack/dotp/releases/download/v0.0.1.20240711.01/dotp-0.0.1.20240711.01-1-x86_64.pkg.tar.zst
