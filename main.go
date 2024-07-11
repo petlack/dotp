@@ -54,6 +54,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "  %svalidate <CODE> [%sOPTIONS%s]%s\n", Clr.Bold, Clr.Underline, Clr.ResetUnderline, Clr.Reset)
 		fmt.Fprintf(os.Stderr, "    Validate a TOTP code\n")
 		fmt.Fprintf(os.Stderr, "  %swatch [%sOPTIONS%s]%s\n", Clr.Bold, Clr.Underline, Clr.ResetUnderline, Clr.Reset)
+		fmt.Fprintf(os.Stderr, "    Watch the TOTP code in real-time\n")
 		fmt.Fprintln(os.Stderr)
 		fmt.Fprintf(os.Stderr, "%s%sOPTIONS%s:\n", Clr.Underline, Clr.Bold, Clr.Reset)
 		fmt.Fprintf(os.Stderr, "  %s--secret-env <ENV_NAME>%s\n", Clr.Bold, Clr.Reset)
