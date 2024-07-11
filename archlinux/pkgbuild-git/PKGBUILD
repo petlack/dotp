@@ -1,6 +1,6 @@
 pkgname=dotp
 pkgrel=1
-pkgver=0.0.0.20240711.00
+pkgver=0.0.0.20240711.01
 pkgdesc="Command-line tool for managing Time-based One-Time Passwords (TOTPs)"
 arch=('i686' 'x86_64')
 url="https://github.com/petlack/$pkgname"
