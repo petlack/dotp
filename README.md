@@ -25,9 +25,6 @@
 - [Installation](#installation)
   - [Alpine](#alpine)
   - [Archlinux](#archlinux)
-    - [Install from AUR](#install-from-aur)
-    - [Build package from source](#build-package-from-source)
-    - [Install from release](#install-from-release)
   - [Ubuntu/Debian](#ubuntudebian)
   - [Other](#other)
     - [Build from source](#build-from-source)
@@ -122,12 +119,12 @@ apk add dotp-0.0.1.20240712.02-r1.apk
 ```
 
 ### Archlinux
-#### Install from AUR
+**Install from AUR**
 ```bash
 yay -S dotp-git
 ```
 
-#### Build package from source
+**Build package from source**
 ```bash
 git clone https://github.com/petlack/dotp && cd dotp || return
 tar -czf archlinux/pkgbuild-src/dotp-0.0.1.20240712.02.tar.gz \
@@ -136,7 +133,7 @@ makepkg --dir archlinux/pkgbuild-src --noconfirm
 sudo pacman -U ./archlinux/pkgbuild-src/dotp-0.0.1.20240712.02-1-x86_64.pkg.tar.zst
 ```
 
-#### Install from release
+**Install from release**
 Head to the [Releases](https://github.com/petlack/dotp/releases) section and download the latest Archlinux package.
 ```bash
 wget https://github.com/petlack/dotp/releases/download/v0.0.1.20240712.02/dotp-0.0.1.20240711.01-1-x86_64.pkg.tar.zst
