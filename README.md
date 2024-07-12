@@ -19,7 +19,7 @@
 - [Examples](#examples)
   - [Secret stored in environment variable](#secret-stored-in-environment-variable)
   - [Secret stored in file](#secret-stored-in-file)
-  - [Using Unsafe Secret Value](#using-unsafe-secret-value)
+  - [Pass secret as an argument](#pass-secret-as-an-argument)
   - [Usage with `pass`](#usage-with-pass)
   - [Integration with `qrencode`](#integration-with-qrencode)
 - [Installation](#installation)
@@ -27,8 +27,6 @@
   - [Archlinux](#archlinux)
   - [Ubuntu/Debian](#ubuntudebian)
   - [Other](#other)
-    - [Build from source](#build-from-source)
-    - [Install release binary](#install-release-binary)
 <!--toc:end-->
 
 ## Usage
@@ -76,7 +74,7 @@ echo "mysecret" > ./secret.plaintext
 dotp get --secret-file ./secret.plaintext
 ```
 
-### Using Unsafe Secret Value
+### Pass secret as an argument
 Directly provide the secret as an argument (not recommended for production use):
 ```bash
 dotp get --secret-unsafe-value "mysecret"
@@ -148,7 +146,7 @@ sudo dpkg -i dotp_0.0.1.20240712.02-1_amd64.deb
 ```
 
 ### Other
-#### Build from source
+**Build from source**
 Make sure you have [Go installed](https://go.dev/doc/install)
 ```bash
 git clone https://github.com/petlack/dotp && cd dotp || return
@@ -156,7 +154,7 @@ go build .
 install -m 755 dotp /usr/local/bin/dotp
 ```
 
-#### Install release binary
+**Install release binary**
 Head to the [Releases](https://github.com/petlack/dotp/releases) section and download the latest binary for your architecture.
 Example:
 ```bash
