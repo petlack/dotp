@@ -73,24 +73,24 @@ yay -S dotp-git
 #### Build package from source
 ```bash
 git clone https://github.com/petlack/dotp && cd dotp || return
-tar -czf archlinux/pkgbuild-src/dotp-0.0.1.20240712.01.tar.gz \
+tar -czf archlinux/pkgbuild-src/dotp-0.0.1.20240712.02.tar.gz \
     *.go go.mod version.txt
 makepkg --dir archlinux/pkgbuild-src --noconfirm
-sudo pacman -U ./archlinux/pkgbuild-src/dotp-0.0.1.20240712.01-1-x86_64.pkg.tar.zst
+sudo pacman -U ./archlinux/pkgbuild-src/dotp-0.0.1.20240712.02-1-x86_64.pkg.tar.zst
 ```
 
 #### Install from release
 Head to the [Releases](https://github.com/petlack/dotp/releases) section and download the latest Archlinux package.
 ```bash
-wget https://github.com/petlack/dotp/releases/download/v0.0.1.20240712.01/dotp-0.0.1.20240711.01-1-x86_64.pkg.tar.zst
-sudo pacman -U ./dotp-0.0.1.20240712.01-1-x86_64.pkg.tar.zst
+wget https://github.com/petlack/dotp/releases/download/v0.0.1.20240712.02/dotp-0.0.1.20240711.01-1-x86_64.pkg.tar.zst
+sudo pacman -U ./dotp-0.0.1.20240712.02-1-x86_64.pkg.tar.zst
 ```
 
 ### Ubuntu/Debian
 Head to the [Releases](https://github.com/petlack/dotp/releases) section and download the latest deb package.
 ```bash
-wget https://github.com/petlack/dotp/releases/download/v0.0.1.20240712.01/dotp_0.0.1.20240711.01-1_amd64.deb
-sudo dpkg -i dotp_0.0.1.20240712.01-1_amd64.deb
+wget https://github.com/petlack/dotp/releases/download/v0.0.1.20240712.02/dotp_0.0.1.20240711.01-1_amd64.deb
+sudo dpkg -i dotp_0.0.1.20240712.02-1_amd64.deb
 ```
 
 ### Other
@@ -106,7 +106,7 @@ install -m 755 dotp /usr/local/bin/dotp
 Head to the [Releases](https://github.com/petlack/dotp/releases) section and download the latest binary for your architecture.
 Example:
 ```bash
-wget https://github.com/petlack/dotp/releases/download/v0.0.1.20240712.01/dotp-linux-amd64
+wget https://github.com/petlack/dotp/releases/download/v0.0.1.20240712.02/dotp-linux-amd64
 install -m 755 dotp-linux-amd64 /usr/local/bin/dotp
 ```
 
