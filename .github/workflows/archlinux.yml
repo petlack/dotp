@@ -16,7 +16,7 @@ jobs:
           pacman -Syu --noconfirm git
       - name: Prepare tarball
         run: |
-          tar -czf archlinux/pkgbuild-src/dotp-$(cat version.txt).tar.gz *.go go.mod version.txt
+          tar -czf .pkgs/archlinux/pkgbuild-src/dotp-$(cat version.txt).tar.gz *.go go.mod version.txt
       - name: Prepare Environment
         id: prepare_packages
         run: |
@@ -25,9 +25,8 @@ jobs:
           printf 'builduser ALL=(ALL) ALL\n' | tee -a /etc/sudoers
           chown -R builduser:builduser .
           version=$(cat version.txt)
-          sudo -u builduser bash -c ""
-          sudo -u builduser bash -c "makepkg -s --clean --noconfirm --dir archlinux/pkgbuild-src"
-          file=$(find archlinux/pkgbuild-src -type f -name "dotp-$version-*.pkg.tar.zst" | head -n1)
+          sudo -u builduser bash -c "makepkg -s --clean --noconfirm --dir .pkgs/archlinux/pkgbuild-src"
+          file=$(find .pkgs/archlinux/pkgbuild-src -type f -name "dotp-$version-*.pkg.tar.zst" | head -n1)
           echo "PACKAGE_PATH=$file" >> $GITHUB_OUTPUT
           echo "PACKAGE_NAME=$(basename $file)" >> $GITHUB_OUTPUT
       - name: Upload binaries to release

@@ -21,6 +21,8 @@ jobs:
           apt-get update
           apt-get -t bookworm-backports install -y golang-go
           go version
+      - name: Copy debian package files
+        run: cp -R .pkgs/debian .
       - name: Update Changelog and Version
         run: |
           dch -v "$(cat version.txt)-1" "Automated build of $(cat version.txt)-1 on Github Actions."

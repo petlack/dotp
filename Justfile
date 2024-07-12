@@ -87,45 +87,75 @@ git-release-branch:
 
 # Build Arch package
 package-arch: package-clean tarball
-    makepkg --dir archlinux/pkgbuild-src --noconfirm
+    makepkg --dir .pkgs/archlinux/pkgbuild-src --noconfirm
+
+package-arch-docker:
+    docker build -t dotp-build-arch -f .pkgs/archlinux.Dockerfile .
+package-arch-docker-export:
+    docker create --name tmp-dotp-build-arch dotp-build-arch
+    docker export tmp-dotp-build-arch > dotp-build-arch.tar
+    docker rm tmp-dotp-build-arch
+    # docker rmi dotp-build-arch
+
+package-alpine-docker:
+    docker build -t dotp-build-alpine -f .pkgs/alpine.Dockerfile .
+package-alpine-docker-export:
+    docker create --name tmp-dotp-build-alpine dotp-build-alpine
+    docker export tmp-dotp-build-alpine > dotp-build-alpine.tar
+    docker rm tmp-dotp-build-alpine
+
+package-debian-docker:
+    docker build -t dotp-build-debian -f .pkgs/debian.Dockerfile .
+package-debian-docker-export:
+    docker create --name tmp-dotp-build-debian dotp-build-debian
+    docker export tmp-dotp-build-debian > dotp-build-debian.tar
+    docker rm tmp-dotp-build-debian
 
 # Clean package build artifacts
 package-clean:
-    rm -rf archlinux/pkgbuild-{src,git}/{src,pkg,{{ BIN_NAME }}}
-    rm -rf archlinux/pkgbuild-{src,git}/*.tar.{zst,gz}
+    rm -rf .pkgs/archlinux/pkgbuild-{src,git}/{src,pkg,{{ BIN_NAME }}}
+    rm -rf .pkgs/archlinux/pkgbuild-{src,git}/*.tar.{zst,gz}
+
+publish: release git-push release-arch-git
+
+# Bump the version, create a git tag and release branch
+release: release-src release-arch-src release-alpine
+    just git-tag; \
+    just git-release-branch; \
+    echo "Updated version to $(cat {{ VERSION_FILE }})"
 
 # Bump the version, create a git tag and release branch
 release-src:
     @echo "Bumping version in {{ VERSION_FILE }}"; \
-    version=$(cat {{ VERSION_FILE }}); \
-    echo "Current version is $version"; \
-    base_version=$(echo $version | grep -oE '^[0-9]+\.[0-9]+\.[0-9]+(-[a-z]+)?' || echo ""); \
+    prev_version=$(cat {{ VERSION_FILE }}); \
+    echo "Current version is $prev_version"; \
+    base_version=$(echo $prev_version | grep -oE '^[0-9]+\.[0-9]+\.[0-9]+(-[a-z]+)?' || echo ""); \
     echo "Base version is $base_version"; \
     date_stamp=$(date +%Y%m%d); \
     sequence=$(grep -o "$date_stamp\.[0-9][0-9]" {{ VERSION_FILE }} | tail -1 | grep -o '[0-9][0-9]$' || echo "00"); \
-    let "new_sequence=10#$sequence+1"; \
-    new_sequence=$(printf "%02d" $new_sequence); \
-    new_version="$base_version.$date_stamp.$new_sequence"; \
-    echo $new_version > {{ VERSION_FILE }}; \
-    git add {{ VERSION_FILE }} && git commit -m "chore: bump $version -> $new_version"; \
+    let "next_sequence=10#$sequence+1"; \
+    next_sequence=$(printf "%02d" $next_sequence); \
+    next_version="$base_version.$date_stamp.$next_sequence"; \
+    echo $next_version > {{ VERSION_FILE }}; \
+    echo "Replacing $prev_version with $next_version in README.md"; \
+    sed -i "s/$prev_version/$next_version/" README.md; \
+    git add {{ VERSION_FILE }} README.md && git commit -m "chore: bump $prev_version -> $next_version"
+
+# Bump the version in the Alpine package
+release-alpine:
+    sed -i "s/^pkgver=.*$/pkgver=$(cat {{ VERSION_FILE }})/" .pkgs/alpine/APKBUILD
+    git add .pkgs/alpine && git commit -m "chore(alpine): bump version to $(cat {{ VERSION_FILE }})"
 
 # Bump the version in the Arch *-src package
 release-arch-src:
-    sed -i "s/^pkgver=.*$/pkgver=$(cat {{ VERSION_FILE }})/" archlinux/pkgbuild-src/PKGBUILD
-    git add archlinux/pkgbuild-src && git commit -m "chore(arch-src): bump version to $(cat {{ VERSION_FILE }})"
+    sed -i "s/^pkgver=.*$/pkgver=$(cat {{ VERSION_FILE }})/" .pkgs/archlinux/pkgbuild-src/PKGBUILD
+    git add .pkgs/archlinux/pkgbuild-src && git commit -m "chore(arch-src): bump version to $(cat {{ VERSION_FILE }})"
 
 # Bump the version in the Arch *-git package
 release-arch-git:
-    makepkg --dir archlinux/pkgbuild-git --noconfirm
-    makepkg --dir archlinux/pkgbuild-git --printsrcinfo > archlinux/pkgbuild-git/.SRCINFO
-    git add archlinux/pkgbuild-git && git commit -m "chore(arch-git): bump version to $(cat {{ VERSION_FILE }})"
-
-# Bump the version, create a git tag and release branch
-release: release-src release-arch-src
-    just git-tag; \
-    just git-release-branch; \
-    version=$(cat {{ VERSION_FILE }}); \
-    echo "Updated version to $version"
+    makepkg --dir .pkgs/archlinux/pkgbuild-git --noconfirm
+    makepkg --dir .pkgs/archlinux/pkgbuild-git --printsrcinfo > .pkgs/archlinux/pkgbuild-git/.SRCINFO
+    git add .pkgs/archlinux/pkgbuild-git && git commit -m "chore(arch-git): bump version to $(cat {{ VERSION_FILE }})"
 
 # Run the binary
 run *args:
@@ -133,7 +163,7 @@ run *args:
 
 # Create source tarball
 tarball:
-    tar -czf archlinux/pkgbuild-src/dotp-$(cat version.txt).tar.gz \
+    tar -czf .pkgs/archlinux/pkgbuild-src/dotp-$(cat version.txt).tar.gz \
         *.go go.mod version.txt LICENSE README.md
 
 # Run tests
