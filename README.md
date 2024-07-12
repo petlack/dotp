@@ -132,6 +132,7 @@ sudo pacman -U ./archlinux/pkgbuild-src/dotp-0.0.1.20240712.02-1-x86_64.pkg.tar.
 ```
 
 **Install from release**
+
 Head to the [Releases](https://github.com/petlack/dotp/releases) section and download the latest Archlinux package.
 ```bash
 wget https://github.com/petlack/dotp/releases/download/v0.0.1.20240712.02/dotp-0.0.1.20240711.01-1-x86_64.pkg.tar.zst
@@ -147,6 +148,7 @@ sudo dpkg -i dotp_0.0.1.20240712.02-1_amd64.deb
 
 ### Other
 **Build from source**
+
 Make sure you have [Go installed](https://go.dev/doc/install)
 ```bash
 git clone https://github.com/petlack/dotp && cd dotp || return
@@ -155,6 +157,7 @@ install -m 755 dotp /usr/local/bin/dotp
 ```
 
 **Install release binary**
+
 Head to the [Releases](https://github.com/petlack/dotp/releases) section and download the latest binary for your architecture.
 Example:
 ```bash
