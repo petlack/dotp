@@ -1,8 +1,8 @@
+[![Tests](https://github.com/petlack/dotp/actions/workflows/tests.yml/badge.svg)](https://github.com/petlack/dotp/actions/workflows/tests.yml)
+[![Compile Binaries](https://github.com/petlack/dotp/actions/workflows/compile.yml/badge.svg)](https://github.com/petlack/dotp/actions/workflows/compile.yml)
 [![Build Alpine Linux Package](https://github.com/petlack/dotp/actions/workflows/alpine.yml/badge.svg)](https://github.com/petlack/dotp/actions/workflows/alpine.yml)
 [![Build Arch Linux Package](https://github.com/petlack/dotp/actions/workflows/archlinux.yml/badge.svg)](https://github.com/petlack/dotp/actions/workflows/archlinux.yml)
 [![Build Debian Package](https://github.com/petlack/dotp/actions/workflows/debian.yml/badge.svg)](https://github.com/petlack/dotp/actions/workflows/debian.yml)
-[![Compile Binaries](https://github.com/petlack/dotp/actions/workflows/compile.yml/badge.svg)](https://github.com/petlack/dotp/actions/workflows/compile.yml)
-[![Tests](https://github.com/petlack/dotp/actions/workflows/tests.yml/badge.svg)](https://github.com/petlack/dotp/actions/workflows/tests.yml)
 
 # dotp
 
@@ -16,7 +16,14 @@
   - [Get current TOTP code](#get-current-totp-code)
   - [Validate TOTP code](#validate-totp-code)
   - [`secret_options`](#secretoptions)
+- [Examples](#examples)
+  - [Secret stored in environment variable](#secret-stored-in-environment-variable)
+  - [Secret stored in file](#secret-stored-in-file)
+  - [Using Unsafe Secret Value](#using-unsafe-secret-value)
+  - [Usage with `pass`](#usage-with-pass)
+  - [Integration with `qrencode`](#integration-with-qrencode)
 - [Installation](#installation)
+  - [Alpine](#alpine)
   - [Archlinux](#archlinux)
     - [Install from AUR](#install-from-aur)
     - [Build package from source](#build-package-from-source)
@@ -25,12 +32,6 @@
   - [Other](#other)
     - [Build from source](#build-from-source)
     - [Install release binary](#install-release-binary)
-- [Examples](#examples)
-  - [Secret stored in environment variable](#secret-stored-in-environment-variable)
-  - [Secret stored in file](#secret-stored-in-file)
-  - [Using Unsafe Secret Value](#using-unsafe-secret-value)
-  - [Usage with `pass`](#usage-with-pass)
-  - [Integration with `qrencode`](#integration-with-qrencode)
 <!--toc:end-->
 
 ## Usage
@@ -61,54 +62,6 @@ These options describe the source of the secret and can be one of
 | `--secret-file /path/to/file` | Path to the file containing the secret |
 | `--secret-stdin` | Read secret from stdin |
 | `--secret-unsafe-value mysecret` | Use the secret provided as an argument |
-
-## Installation
-
-### Archlinux
-#### Install from AUR
-```bash
-yay -S dotp-git
-```
-
-#### Build package from source
-```bash
-git clone https://github.com/petlack/dotp && cd dotp || return
-tar -czf archlinux/pkgbuild-src/dotp-0.0.1.20240712.02.tar.gz \
-    *.go go.mod version.txt
-makepkg --dir archlinux/pkgbuild-src --noconfirm
-sudo pacman -U ./archlinux/pkgbuild-src/dotp-0.0.1.20240712.02-1-x86_64.pkg.tar.zst
-```
-
-#### Install from release
-Head to the [Releases](https://github.com/petlack/dotp/releases) section and download the latest Archlinux package.
-```bash
-wget https://github.com/petlack/dotp/releases/download/v0.0.1.20240712.02/dotp-0.0.1.20240711.01-1-x86_64.pkg.tar.zst
-sudo pacman -U ./dotp-0.0.1.20240712.02-1-x86_64.pkg.tar.zst
-```
-
-### Ubuntu/Debian
-Head to the [Releases](https://github.com/petlack/dotp/releases) section and download the latest deb package.
-```bash
-wget https://github.com/petlack/dotp/releases/download/v0.0.1.20240712.02/dotp_0.0.1.20240711.01-1_amd64.deb
-sudo dpkg -i dotp_0.0.1.20240712.02-1_amd64.deb
-```
-
-### Other
-#### Build from source
-Make sure you have [Go installed](https://go.dev/doc/install)
-```bash
-git clone https://github.com/petlack/dotp && cd dotp || return
-go build .
-install -m 755 dotp /usr/local/bin/dotp
-```
-
-#### Install release binary
-Head to the [Releases](https://github.com/petlack/dotp/releases) section and download the latest binary for your architecture.
-Example:
-```bash
-wget https://github.com/petlack/dotp/releases/download/v0.0.1.20240712.02/dotp-linux-amd64
-install -m 755 dotp-linux-amd64 /usr/local/bin/dotp
-```
 
 ## Examples
 
@@ -155,4 +108,61 @@ To add the TOTP secret to a mobile app, you can use [qrencode](https://github.co
 pass show 'TOTP/mykey' |
     dotp uri --account foo@bar --issuer myapp --secret-stdin |
     qrencode -t ANSI
+```
+
+## Installation
+
+### Alpine
+Head to the [Releases](https://github.com/petlack/dotp/releases) section and download the latest apk package and public key.
+```bash
+wget https://github.com/petlack/dotp/releases/download/v0.0.1.20240712.02/dotp-0.0.1.20240712.02-r1.apk
+wget https://github.com/petlack/dotp/releases/download/v0.0.1.20240712.02/dotp-0.0.1.20240712.02-r1.apk.rsa.pub
+cp dotp-0.0.1.20240712.02-r1.apk.rsa.pub /etc/apk/keys/
+apk add dotp-0.0.1.20240712.02-r1.apk
+```
+
+### Archlinux
+#### Install from AUR
+```bash
+yay -S dotp-git
+```
+
+#### Build package from source
+```bash
+git clone https://github.com/petlack/dotp && cd dotp || return
+tar -czf archlinux/pkgbuild-src/dotp-0.0.1.20240712.02.tar.gz \
+    *.go go.mod version.txt
+makepkg --dir archlinux/pkgbuild-src --noconfirm
+sudo pacman -U ./archlinux/pkgbuild-src/dotp-0.0.1.20240712.02-1-x86_64.pkg.tar.zst
+```
+
+#### Install from release
+Head to the [Releases](https://github.com/petlack/dotp/releases) section and download the latest Archlinux package.
+```bash
+wget https://github.com/petlack/dotp/releases/download/v0.0.1.20240712.02/dotp-0.0.1.20240711.01-1-x86_64.pkg.tar.zst
+sudo pacman -U ./dotp-0.0.1.20240712.02-1-x86_64.pkg.tar.zst
+```
+
+### Ubuntu/Debian
+Head to the [Releases](https://github.com/petlack/dotp/releases) section and download the latest deb package.
+```bash
+wget https://github.com/petlack/dotp/releases/download/v0.0.1.20240712.02/dotp_0.0.1.20240711.01-1_amd64.deb
+sudo dpkg -i dotp_0.0.1.20240712.02-1_amd64.deb
+```
+
+### Other
+#### Build from source
+Make sure you have [Go installed](https://go.dev/doc/install)
+```bash
+git clone https://github.com/petlack/dotp && cd dotp || return
+go build .
+install -m 755 dotp /usr/local/bin/dotp
+```
+
+#### Install release binary
+Head to the [Releases](https://github.com/petlack/dotp/releases) section and download the latest binary for your architecture.
+Example:
+```bash
+wget https://github.com/petlack/dotp/releases/download/v0.0.1.20240712.02/dotp-linux-amd64
+install -m 755 dotp-linux-amd64 /usr/local/bin/dotp
 ```
