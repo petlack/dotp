@@ -16,6 +16,7 @@
 - [Usage](#usage)
   - [Generate a new secret](#generate-a-new-secret)
   - [Get current TOTP code](#get-current-totp-code)
+  - [Watch current TOTP code](#watch-current-totp-code)
   - [Validate TOTP code](#validate-totp-code)
   - [`secret_options`](#secretoptions)
 - [Examples](#examples)
@@ -44,6 +45,12 @@ dotp new
 Retrieve the current TOTP code using the secret options described below:
 ```bash
 dotp get [secret_options]
+```
+
+### Watch current TOTP code
+Watch the current TOTP code in the terminal using the command
+```bash
+dotp watch [secret_options]
 ```
 
 ### Validate TOTP code
@@ -159,7 +166,7 @@ sudo dpkg -i dotp_0.0.1.20240713.01-1_amd64.deb
 ### Other
 **Build from source**
 
-Make sure you have [Go installed](https://go.dev/doc/install)
+Make sure you have [Go 1.22 installed](https://go.dev/doc/install)
 ```bash
 git clone https://github.com/petlack/dotp && cd dotp || return
 go build .
