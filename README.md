@@ -4,6 +4,7 @@
 [![Build Alpine Linux Package](https://github.com/petlack/dotp/actions/workflows/alpine.yml/badge.svg)](https://github.com/petlack/dotp/actions/workflows/alpine.yml)
 [![Build Arch Linux Package](https://github.com/petlack/dotp/actions/workflows/archlinux.yml/badge.svg)](https://github.com/petlack/dotp/actions/workflows/archlinux.yml)
 [![Build Debian Package](https://github.com/petlack/dotp/actions/workflows/debian.yml/badge.svg)](https://github.com/petlack/dotp/actions/workflows/debian.yml)
+[![Build RPM Package](https://github.com/petlack/dotp/actions/workflows/rpm.yml/badge.svg)](https://github.com/petlack/dotp/actions/workflows/rpm.yml)
 
 # dotp
 
