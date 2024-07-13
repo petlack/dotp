@@ -31,6 +31,7 @@ COPY --chown=builder:builder .pkgs/debian /home/builder/src/debian
 WORKDIR /home/builder/src
 
 RUN chmod +x debian/rules
+RUN dch -v "$(cat version.txt)-1" "Automated build of $(cat version.txt)-1 with Docker"
 
 RUN dpkg-buildpackage -us -uc -ui -b
 
