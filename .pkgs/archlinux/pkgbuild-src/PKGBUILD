@@ -1,5 +1,5 @@
 pkgname=dotp
-pkgver=0.0.1.20240712.02
+pkgver=0.0.1.20240713.01
 pkgrel=1
 pkgdesc="Command-line tool for managing Time-based One-Time Passwords (TOTPs)"
 arch=('i686' 'x86_64')

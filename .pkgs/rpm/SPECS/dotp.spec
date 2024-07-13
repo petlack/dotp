@@ -1,5 +1,5 @@
 Name:           dotp
-Version:        0.0.1.20240712.02
+Version:        0.0.1.20240713.01
 Release:        1%{?dist}
 Summary:        Command-line tool for managing Time-based One-Time Passwords (TOTPs)
 
