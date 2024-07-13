@@ -1,4 +1,4 @@
-FROM alpine:latest AS builder
+FROM alpine:3.20 AS builder
 RUN apk add --no-cache alpine-sdk go git sudo
 
 RUN adduser -G abuild -g "Alpine Package Builder" -s /bin/ash -D builder && \
