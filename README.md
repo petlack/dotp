@@ -1,8 +1,8 @@
 [![Tests](https://github.com/petlack/dotp/actions/workflows/tests.yml/badge.svg)](https://github.com/petlack/dotp/actions/workflows/tests.yml)
 [![Compile Binaries](https://github.com/petlack/dotp/actions/workflows/compile.yml/badge.svg)](https://github.com/petlack/dotp/actions/workflows/compile.yml)
 
-[![Build Alpine Package](https://github.com/petlack/dotp/actions/workflows/alpine.yml/badge.svg)](https://github.com/petlack/dotp/actions/workflows/alpine.yml)
 [![Build Arch Linux Package](https://github.com/petlack/dotp/actions/workflows/archlinux.yml/badge.svg)](https://github.com/petlack/dotp/actions/workflows/archlinux.yml)
+[![Build Alpine Package](https://github.com/petlack/dotp/actions/workflows/alpine.yml/badge.svg)](https://github.com/petlack/dotp/actions/workflows/alpine.yml)
 [![Build Debian Package](https://github.com/petlack/dotp/actions/workflows/debian.yml/badge.svg)](https://github.com/petlack/dotp/actions/workflows/debian.yml)
 [![Build RPM Package](https://github.com/petlack/dotp/actions/workflows/rpm.yml/badge.svg)](https://github.com/petlack/dotp/actions/workflows/rpm.yml)
 
@@ -18,7 +18,7 @@
   - [Get current TOTP code](#get-current-totp-code)
   - [Watch current TOTP code](#watch-current-totp-code)
   - [Validate TOTP code](#validate-totp-code)
-  - [`secret_options`](#secretoptions)
+  - [`secret_options`](#secret_options)
 - [Examples](#examples)
   - [Secret stored in environment variable](#secret-stored-in-environment-variable)
   - [Secret stored in file](#secret-stored-in-file)

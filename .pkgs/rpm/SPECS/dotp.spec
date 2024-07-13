@@ -32,5 +32,5 @@ go test ./...
 %{_bindir}/%{name}
 
 %changelog
-* Fri Jul 12 2024 John Doe <email@example.com> - %{version}-%{release}
+* Fri Jul 12 2024 Peter Laca <peter@laca.me> - %{version}-%{release}
 - Initial RPM release
