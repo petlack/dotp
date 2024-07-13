@@ -1,4 +1,4 @@
-name: Build Debian Package
+name: DEB Package
 on:
   push:
     tags:

@@ -1,4 +1,4 @@
-name: Build Alpine Linux Package
+name: APK Package
 on:
   push:
     tags:

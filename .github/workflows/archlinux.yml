@@ -1,4 +1,4 @@
-name: Build Arch Linux Package
+name: ALPM Package
 on:
   push:
     tags:

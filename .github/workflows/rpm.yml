@@ -1,4 +1,4 @@
-name: Build RPM Package
+name: RPM Package
 on:
   push:
     tags:
