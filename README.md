@@ -120,10 +120,10 @@ pass show 'TOTP/mykey' |
 ### Alpine
 Head to the [Releases](https://github.com/petlack/dotp/releases) section and download the latest apk package and public key.
 ```bash
-wget https://github.com/petlack/dotp/releases/download/v0.0.1.20240713.01/dotp-0.0.1.20240713.01-r1.apk
-wget https://github.com/petlack/dotp/releases/download/v0.0.1.20240713.01/dotp-0.0.1.20240713.01-r1.apk.rsa.pub
-cp dotp-0.0.1.20240713.01-r1.apk.rsa.pub /etc/apk/keys/
-apk add dotp-0.0.1.20240713.01-r1.apk
+wget https://github.com/petlack/dotp/releases/download/v0.0.1.20240718.01/dotp-0.0.1.20240713.01-r1.apk
+wget https://github.com/petlack/dotp/releases/download/v0.0.1.20240718.01/dotp-0.0.1.20240713.01-r1.apk.rsa.pub
+cp dotp-0.0.1.20240718.01-r1.apk.rsa.pub /etc/apk/keys/
+apk add dotp-0.0.1.20240718.01-r1.apk
 ```
 
 ### Arch Linux
@@ -135,32 +135,32 @@ yay -S dotp-git
 **Build package from source**
 ```bash
 git clone https://github.com/petlack/dotp && cd dotp || return
-tar -czf archlinux/pkgbuild-src/dotp-0.0.1.20240713.01.tar.gz \
+tar -czf archlinux/pkgbuild-src/dotp-0.0.1.20240718.01.tar.gz \
     *.go go.mod version.txt
 makepkg --dir archlinux/pkgbuild-src --noconfirm
-sudo pacman -U ./archlinux/pkgbuild-src/dotp-0.0.1.20240713.01-1-x86_64.pkg.tar.zst
+sudo pacman -U ./archlinux/pkgbuild-src/dotp-0.0.1.20240718.01-1-x86_64.pkg.tar.zst
 ```
 
 **Install from release**
 
 Head to the [Releases](https://github.com/petlack/dotp/releases) section and download the latest Arch Linux package.
 ```bash
-wget https://github.com/petlack/dotp/releases/download/v0.0.1.20240713.01/dotp-0.0.1.20240713.01-1-x86_64.pkg.tar.zst
-sudo pacman -U ./dotp-0.0.1.20240713.01-1-x86_64.pkg.tar.zst
+wget https://github.com/petlack/dotp/releases/download/v0.0.1.20240718.01/dotp-0.0.1.20240713.01-1-x86_64.pkg.tar.zst
+sudo pacman -U ./dotp-0.0.1.20240718.01-1-x86_64.pkg.tar.zst
 ```
 
 ### Fedora/openSUSE
 Head to the [Releases](https://github.com/petlack/dotp/releases) section and download the latest **rpm** package.
 ```bash
-wget https://github.com/petlack/dotp/releases/download/v0.0.1.20240713.01/dotp_0.0.1.20240713.01.fc41.x86_64.rpm
-sudo dnf install -y dotp_0.0.1.20240713.01-1.fc41.x86_64.rpm
+wget https://github.com/petlack/dotp/releases/download/v0.0.1.20240718.01/dotp_0.0.1.20240713.01.fc41.x86_64.rpm
+sudo dnf install -y dotp_0.0.1.20240718.01-1.fc41.x86_64.rpm
 ```
 
 ### Ubuntu/Debian
 Head to the [Releases](https://github.com/petlack/dotp/releases) section and download the latest **deb** package.
 ```bash
-wget https://github.com/petlack/dotp/releases/download/v0.0.1.20240713.01/dotp_0.0.1.20240713.01-1_amd64.deb
-sudo dpkg -i dotp_0.0.1.20240713.01-1_amd64.deb
+wget https://github.com/petlack/dotp/releases/download/v0.0.1.20240718.01/dotp_0.0.1.20240713.01-1_amd64.deb
+sudo dpkg -i dotp_0.0.1.20240718.01-1_amd64.deb
 ```
 
 ### Other
@@ -178,6 +178,6 @@ install -m 755 dotp /usr/local/bin/dotp
 Head to the [Releases](https://github.com/petlack/dotp/releases) section and download the latest binary for your architecture.
 Example:
 ```bash
-wget https://github.com/petlack/dotp/releases/download/v0.0.1.20240713.01/dotp-linux-amd64
+wget https://github.com/petlack/dotp/releases/download/v0.0.1.20240718.01/dotp-linux-amd64
 install -m 755 dotp-linux-amd64 /usr/local/bin/dotp
 ```
