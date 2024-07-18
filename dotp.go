@@ -53,7 +53,7 @@ var Clr = Colors{
 func LoadConfig(args []string) (*Config, []string) {
 	configFlagSet := flag.NewFlagSet("config", flag.ExitOnError)
 
-	accountName := configFlagSet.String("account-name", "", "Account Name")
+	accountName := configFlagSet.String("account", "", "Account Name")
 	issuer := configFlagSet.String("issuer", "", "Issuer")
 	secretUnsafeValue := configFlagSet.String("secret-unsafe-value", "", "Secret")
 	secretEnv := configFlagSet.String("secret-env", "", "Name of the environment variable containing the secret")
