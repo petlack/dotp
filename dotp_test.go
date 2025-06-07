@@ -18,3 +18,11 @@ func TestMain(t *testing.T) {
 		t.Errorf("Error: Failed to validate TOTP")
 	}
 }
+
+func TestGenerateTotpUri(t *testing.T) {
+	uri := GenerateTotpUri("ABCDEF", "foo@bar", "myapp")
+	expected := "otpauth://totp/myapp:foo@bar?issuer=myapp&secret=ABCDEF"
+	if uri != expected {
+		t.Errorf("Unexpected URI: %s", uri)
+	}
+}

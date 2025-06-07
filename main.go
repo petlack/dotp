@@ -108,7 +108,13 @@ func main() {
 
 	case "uri":
 		secret := LoadSecret(config)
-		totpUri := GenerateTotpUri(secret, "demo-account", "demo-app")
+		account := config.AccountName
+		issuer := config.Issuer
+		if account == "" || issuer == "" {
+			fmt.Fprintf(os.Stderr, "--account and --issuer are required for uri action\n")
+			os.Exit(1)
+		}
+		totpUri := GenerateTotpUri(secret, account, issuer)
 		fmt.Print(totpUri)
 		os.Exit(0)
 
